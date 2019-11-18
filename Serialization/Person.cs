@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Serialization
 {
     [Serializable]
-    public class Person: IDeserializationCallback
+    public class Person: IDeserializationCallback, ISerializable
     {
         private static string FileName = "Az.bin";
         public string Name { set; get; }
@@ -22,6 +22,13 @@ namespace Serialization
 
         public Person()
         { 
+        }
+
+        public Person(SerializationInfo info, StreamingContext context)
+        {
+            Name = (string)info.GetValue("Name", typeof(string));
+            BirthDate = (DateTime)info.GetValue("BirthDate", typeof(DateTime));
+            gender = (Gender)info.GetValue("gender", typeof(Gender));
         }
 
         public Person(string name, DateTime birthdate, Gender gender)
@@ -62,6 +69,13 @@ namespace Serialization
         public void OnDeserialization(object sender)
         {
             Age = DateTime.Now.Year - BirthDate.Year;
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Name", this.Name, typeof(string));
+            info.AddValue("BirthDate", this.BirthDate, typeof(DateTime));
+            info.AddValue("gender", this.gender, typeof(Gender));
         }
     }
 }
