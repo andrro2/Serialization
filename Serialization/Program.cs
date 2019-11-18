@@ -10,7 +10,11 @@ namespace Serialization
     {
         static void Main(string[] args)
         {
-            Person person = new Person("Jack", new DateTime(1990, 05, 24), Gender.MALE);
+            Person person = new Person("Fred", new DateTime(1990, 05, 24), Gender.MALE);
+            Console.WriteLine(person);
+            person.Serialize("");
+            Console.ReadLine();
+            person = Person.Deserialize();
             Console.WriteLine(person);
             Console.ReadLine();
         }

@@ -34,6 +34,10 @@ namespace Serialization.Test
         public void TestPersonToString()
         {
             string stringTest = "Name: " + nameTest + ", Gender: " + Gender.MALE + ", Age: " + (DateTime.Now.Year - birthDateTest.Year) + ", BirthDate: " + birthDateTest.ToString("yyyy-MM-dd");
+            Assert.AreEqual(stringTest, person.ToString());
         }
+
+        [Test]
+        public void 
     }
 }
